@@ -24,4 +24,16 @@ Route::get(
     [Controller::class, 'index']
 )->name('index');
 
+Route::get(
+    '/create', 
+    [Controller::class, 'create']
+)->name('index');
+
+Route::post(
+    '/create', 
+    [Controller::class, 'store']
+)->name('store');
+
+
+
 //適当な文字列を返すだけのルート

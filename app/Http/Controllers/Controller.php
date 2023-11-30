@@ -8,6 +8,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class Controller extends BaseController
 {
@@ -18,5 +19,30 @@ class Controller extends BaseController
         $users = DB::table('users')->orderBy('id', 'asc')->paginate(10);
 
         return view('index', ['users' => $users]);
+    }
+
+    public function create()
+    {
+        return view('create');
+    } 
+
+    public function store()
+    {
+        //validation
+        request()->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required'
+        ]);
+
+        $password = Hash::make(request('password'));
+
+        $user = new User();
+        $user->name = request('name');
+        $user->email = request('email');
+        $user->password = $password;
+        $user->save();
+
+        return redirect()->route('index');
     }
 }
