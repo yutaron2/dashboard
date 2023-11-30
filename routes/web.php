@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get(
+    '/users', 
+    [Controller::class, 'index']
+)->name('index');
+
+//適当な文字列を返すだけのルート
