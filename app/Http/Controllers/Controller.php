@@ -45,4 +45,30 @@ class Controller extends BaseController
 
         return redirect()->route('index');
     }
+
+    public function edit($id)
+    {
+        $user = User::find($id);
+
+        return view('edit', ['user' => $user]);
+    }
+
+    public function update($id)
+    {
+        request()->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,'.$id,
+            'password' => 'required'
+        ]);
+
+        $password = Hash::make(request('password'));
+
+        $user = User::find($id);
+        $user->name = request('name');
+        $user->email = request('email');
+        $user->password = $password;
+        $user->save();
+
+        return redirect()->route('index');
+    }
 }

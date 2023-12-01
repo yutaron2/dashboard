@@ -27,13 +27,20 @@ Route::get(
 Route::get(
     '/create', 
     [Controller::class, 'create']
-)->name('index');
+)->name('create');
 
 Route::post(
     '/create', 
     [Controller::class, 'store']
 )->name('store');
 
+Route::get(
+    '/edit/{id}', 
+    [Controller::class, 'edit']
+)->name('edit');
 
-
+Route::post(
+    'update/{id}',
+    [Controller::class, 'update']
+)->name('update');
 //適当な文字列を返すだけのルート
