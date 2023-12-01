@@ -71,4 +71,12 @@ class Controller extends BaseController
 
         return redirect()->route('index');
     }
+
+    public function delete($id)
+    {
+        $user = User::find($id);
+        $user->delete();
+
+        return redirect()->route('index');
+    }
 }

@@ -43,4 +43,9 @@ Route::post(
     'update/{id}',
     [Controller::class, 'update']
 )->name('update');
-//適当な文字列を返すだけのルート
+
+Route::delete(
+    'delete/{id}',
+    [Controller::class, 'delete']
+)->name('delete');
+
